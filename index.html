@@ -33,25 +33,29 @@
   .skills{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
   .skill{background:rgba(255,255,255,0.03);padding:8px 10px;border-radius:10px;color:var(--muted);font-weight:600;font-size:13px}
   .projects-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(240px,1fr));gap:16px;margin-top:8px}
-  .card{background:var(--card);padding:12px;border-radius:12px;display:flex;flex-direction:column;gap:8px}
+  .card{background:var(--card);padding:12px;border-radius:12px;display:flex;flex-direction:column;gap:8px;transition:transform .18s ease, box-shadow .18s ease}
   .card img{width:100%;height:400px;object-fit:cover;object-position:center;border-radius:8px;}
   .card h4{margin:0;font-size:15px}
   .card p{color:var(--muted);font-size:13px;margin:0}
   .card .row{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+  .card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(2,8,23,0.6)}
   footer{margin-top:20px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
   .contact a{color:var(--muted);text-decoration:none}
 
-  /* scrollable tabs */
-  .tabs {display:block;overflow-x:auto;white-space:nowrap;padding:8px 4px;margin-top:12px;margin-bottom:6px}
-  .tabs button{display:inline-block;margin-right:8px;border:none;padding:8px 14px;border-radius:999px;background:transparent;color:var(--muted);cursor:pointer;border:1px solid rgba(255,255,255,0.04);font-weight:600}
-  .tabs button.active{background:linear-gradient(90deg,var(--accent),#38b6ff);color:#02243a;border-color:transparent}
-
-  /* filtered state */
-  .card.hidden{display:none}
+  /* small controls */
+  .proj-controls {display:flex;gap:10px;align-items:center;margin-top:12px;margin-bottom:12px}
+  .proj-controls .btn {padding:8px 12px;font-size:14px}
+  .proj-counter {color:var(--muted);font-weight:600}
 
   @media(min-width:820px){
     main{grid-template-columns: 1fr 360px}
     .projects-grid{grid-column:1 / span 2}
+  }
+
+  /* responsive - single column on small screens */
+  @media (max-width: 600px) {
+    .projects-grid { grid-template-columns: 1fr !important; }
+    .card img { height: 320px; }
   }
 </style>
 </head>
@@ -101,49 +105,70 @@
         </div>
       </aside>
 
+      <!-- === UPDATED PROJECTS SECTION (2 tiles at a time + Prev/Next + clickable tiles) === -->
       <section id="projects" class="panel" style="grid-column:1 / -1">
         <h3>Projects</h3>
 
-        <div class="projects-grid" id="projectsGrid">
-          <!-- Exactly six project tiles with image file paths -->
-
-          <article class="card">
-            <img src="assets/looker-dashboard.png" alt="Looker Dashboard">
-            <h4>Looker Dashboard</h4>
-            <p>Designed semantic model and interactive Looker explores to deliver actionable insights with scheduled reports and access controls.</p>
-          </article>
-
-          <article class="card">
-            <img src="assets/excel-analysis.png" alt="Excel Analysis">
-            <h4>Excel Analysis</h4>
-            <p>Macro-enabled executive pack and Power Query transformations used for reconciliations and KPI reporting.</p>
-          </article>
-
-          <article class="card">
-            <img src="assets/sql-analysis.png" alt="SQL Analysis">
-            <h4>SQL Analysis</h4>
-            <p>SQL-driven analytics with window functions and optimized queries to support reporting and ad-hoc requests.</p>
-          </article>
-
-          <article class="card">
-            <img src="assets/powerbi-dashboard.png" alt="Power BI Dashboard">
-            <h4>Power BI Dashboard</h4>
-            <p>Interactive Power BI solution with row-level security, incremental refresh and optimized DAX measures.</p>
-          </article>
-
-          <article class="card">
-            <img src="assets/automation-workflow.png" alt="Automation Workflow">
-            <h4>Automation Workflow</h4>
-            <p>End-to-end workflow automation to deliver reports and reduce manual effort.</p>
-          </article>
-
-          <article class="card">
-            <img src="assets/google-apps-script.png" alt="Google Apps Script">
-            <h4>Google Apps Script</h4>
-            <p>Custom Google Apps Script solutions for automating Sheets and Gmail workflows.</p>
-          </article>
-
+        <!-- navigation buttons -->
+        <div class="proj-controls">
+          <button id="projPrev" class="btn ghost" aria-label="Previous projects">Prev</button>
+          <button id="projNext" class="btn ghost" aria-label="Next projects">Next</button>
+          <div style="flex:1"></div>
+          <div id="projCounter" class="proj-counter"></div>
         </div>
+
+        <div class="projects-grid" id="projectsGrid" style="grid-template-columns:repeat(2,1fr);gap:18px">
+          <!-- Exactly six project tiles with data-link placeholders - update data-link to your URL / file -->
+          <article class="card" data-link="assets/looker-dashboard.pdf" data-index="0">
+            <a class="card-link" href="assets/looker-dashboard.pdf" style="color:inherit;text-decoration:none;display:block" target="_blank">
+              <img src="assets/looker-dashboard.png" alt="Looker Dashboard">
+              <h4>Looker Dashboard</h4>
+              <p>Designed semantic model and interactive Looker explores to deliver actionable insights with scheduled reports and access controls.</p>
+            </a>
+          </article>
+
+          <article class="card" data-link="assets/excel-analysis.pdf" data-index="1">
+            <a class="card-link" href="assets/excel-analysis.pdf" style="color:inherit;text-decoration:none;display:block" target="_blank">
+              <img src="assets/excel-analysis.png" alt="Excel Analysis">
+              <h4>Excel Analysis</h4>
+              <p>Macro-enabled executive pack and Power Query transformations used for reconciliations and KPI reporting.</p>
+            </a>
+          </article>
+
+          <article class="card" data-link="assets/sql-analysis.pdf" data-index="2">
+            <a class="card-link" href="assets/sql-analysis.pdf" style="color:inherit;text-decoration:none;display:block" target="_blank">
+              <img src="assets/sql-analysis.png" alt="SQL Analysis">
+              <h4>SQL Analysis</h4>
+              <p>SQL-driven analytics with window functions and optimized queries to support reporting and ad-hoc requests.</p>
+            </a>
+          </article>
+
+          <article class="card" data-link="assets/powerbi-dashboard.pdf" data-index="3">
+            <a class="card-link" href="assets/powerbi-dashboard.pdf" style="color:inherit;text-decoration:none;display:block" target="_blank">
+              <img src="assets/powerbi-dashboard.png" alt="Power BI Dashboard">
+              <h4>Power BI Dashboard</h4>
+              <p>Interactive Power BI solution with row-level security, incremental refresh and optimized DAX measures.</p>
+            </a>
+          </article>
+
+          <article class="card" data-link="assets/automation-workflow.pdf" data-index="4">
+            <a class="card-link" href="assets/automation-workflow.pdf" style="color:inherit;text-decoration:none;display:block" target="_blank">
+              <img src="assets/automation-workflow.png" alt="Automation Workflow">
+              <h4>Automation Workflow</h4>
+              <p>End-to-end workflow automation to deliver reports and reduce manual effort.</p>
+            </a>
+          </article>
+
+          <article class="card" data-link="assets/google-apps-script.pdf" data-index="5">
+            <a class="card-link" href="assets/google-apps-script.pdf" style="color:inherit;text-decoration:none;display:block" target="_blank">
+              <img src="assets/google-apps-script.png" alt="Google Apps Script">
+              <h4>Google Apps Script</h4>
+              <p>Custom Google Apps Script solutions for automating Sheets and Gmail workflows.</p>
+            </a>
+          </article>
+        </div>
+
+        <p style="color:var(--muted);margin-top:10px">Use Prev / Next to navigate through projects (2 at a time). On mobile this will show 1 at a time.</p>
       </section>
 
       <footer class="panel" style="grid-column:1 / -1;display:flex;align-items:center;justify-content:space-between">
@@ -154,24 +179,73 @@
   </div>
 
   <script>
-    // Tabs filtering logic
-    const tabs = document.querySelectorAll('.tabs button');
-    const cards = document.querySelectorAll('.projects-grid .card');
+    (function(){
+      const cards = Array.from(document.querySelectorAll('#projectsGrid .card'));
+      let perPage = 2;
+      let page = 0;
+      const prevBtn = document.getElementById('projPrev');
+      const nextBtn = document.getElementById('projNext');
+      const counter = document.getElementById('projCounter');
 
-    tabs.forEach(t => t.addEventListener('click', () => {
-      tabs.forEach(x => x.classList.remove('active'));
-      t.classList.add('active');
-      const filter = t.getAttribute('data-filter');
+      function calculatePerPage(){
+        // 1 on small screens, 2 otherwise
+        return window.innerWidth < 600 ? 1 : 2;
+      }
+
+      function showPage(p){
+        perPage = calculatePerPage();
+        const totalPages = Math.ceil(cards.length / perPage);
+        page = Math.max(0, Math.min(p, totalPages - 1));
+        const start = page * perPage;
+        const end = start + perPage;
+
+        cards.forEach((c, i) => {
+          if(i >= start && i < end){
+            c.style.display = '';
+            c.style.opacity = 1;
+            c.style.transform = 'translateY(0)';
+            c.style.pointerEvents = 'auto';
+          } else {
+            c.style.opacity = 0;
+            c.style.transform = 'translateY(8px)';
+            c.style.pointerEvents = 'none';
+            c.style.display = 'none';
+          }
+        });
+
+        prevBtn.disabled = page === 0;
+        nextBtn.disabled = page === totalPages - 1;
+        prevBtn.style.opacity = prevBtn.disabled ? 0.5 : 1;
+        nextBtn.style.opacity = nextBtn.disabled ? 0.5 : 1;
+        counter.textContent = (page + 1) + ' / ' + totalPages;
+      }
+
+      prevBtn.addEventListener('click', () => showPage(page - 1));
+      nextBtn.addEventListener('click', () => showPage(page + 1));
+
+      // make each card clickable using data-link (open in new tab)
       cards.forEach(c => {
-        if(filter === 'all'){
-          c.classList.remove('hidden');
-        } else {
-          c.classList.toggle('hidden', c.getAttribute('data-cat') !== filter);
-        }
+        const link = c.getAttribute('data-link') || '#';
+        // navigate when card clicked (but not when inner link clicked)
+        c.addEventListener('click', (e) => {
+          const target = e.target;
+          if(target.tagName.toLowerCase() === 'a') return;
+          if(link && link !== '#') window.open(link, '_blank');
+        });
+        const a = c.querySelector('a.card-link');
+        if(a) a.setAttribute('href', link || '#');
       });
-      // make clicked tab visible in scroll area (center it)
-      t.scrollIntoView({behavior:'smooth', inline:'center'});
-    }));
+
+      // re-render on resize to adjust perPage
+      window.addEventListener('resize', () => {
+        // keep first visible item in view
+        const firstVisibleIndex = page * perPage;
+        showPage(Math.floor(firstVisibleIndex / calculatePerPage()));
+      });
+
+      // initial render
+      showPage(0);
+    })();
   </script>
 </body>
 </html>
