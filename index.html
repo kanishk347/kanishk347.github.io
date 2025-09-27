@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Kanishk Pant — Data & Power BI Portfolio</title>
+<link rel="icon" href="data:," />
+<style>
+  :root{
+    --bg:#071024; /* deep navy */
+    --panel:#0b2b4a; /* bluish panel */
+    --accent:#1e90ff; /* accent blue */
+    --muted:#9fb7d8;
+    --card:#0e3a61;
+    --glass: rgba(255,255,255,0.03);
+    --radius:14px;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:linear-gradient(180deg,var(--bg),#041426);color:#eaf6ff;line-height:1.45}
+  .container{max-width:980px;margin:36px auto;padding:24px}
+  header{display:flex;gap:20px;align-items:center}
+  .avatar{width:120px;height:120px;border-radius:16px;object-fit:cover;border:3px solid rgba(255,255,255,0.06);background:var(--glass)}
+  .hero{flex:1}
+  h1{margin:.1rem 0;font-size:28px;letter-spacing:-0.5px}
+  .role{color:var(--muted);margin-bottom:10px}
+  .actions{display:flex;gap:10px;margin-top:10px}
+  .btn{background:linear-gradient(90deg,var(--accent),#38b6ff);color:#02243a;padding:10px 14px;border-radius:10px;font-weight:600;text-decoration:none}
+  .btn.ghost{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.04)}
+  main{margin-top:26px;display:grid;grid-template-columns:1fr;gap:22px}
+  .panel{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:18px;border-radius:var(--radius);box-shadow:0 6px 20px rgba(2,8,23,0.6)}
+  .about p{color:var(--muted);margin:0}
+  .skills{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+  .skill{background:rgba(255,255,255,0.03);padding:8px 10px;border-radius:10px;color:var(--muted);font-weight:600;font-size:13px}
+  .projects-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(240px,1fr));gap:16px;margin-top:8px}
+  .card{background:var(--card);padding:12px;border-radius:12px;display:flex;flex-direction:column;gap:8px}
+  .card img{width:100%;height:130px;object-fit:cover;border-radius:8px}
+  .card h4{margin:0;font-size:15px}
+  .card p{color:var(--muted);font-size:13px;margin:0}
+  .card .row{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+  footer{margin-top:20px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+  .contact a{color:var(--muted);text-decoration:none}
+  @media(min-width:820px){
+    main{grid-template-columns: 1fr 360px}
+    .projects-grid{grid-column:1 / span 2}
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img class="avatar" src="assets/avatar.jpg" alt="Kanishk Pant">
+      <div class="hero">
+        <h1>Kanishk Pant</h1>
+        <div class="role">Senior Data Analyst • Power BI Specialist</div>
+        <div class="actions">
+          <a class="btn" href="resume.pdf" download>Download Resume</a>
+          <a class="btn ghost" href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn ghost" href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel about">
+        <h3>About</h3>
+        <p>I transform business problems into actionable dashboards and reports. I have 9+ years of experience in data analytics, building Power BI solutions, writing performant SQL, and delivering insights that drive decisions. I focus on clean data modeling, intuitive UX and measurable outcomes.</p>
+
+        <h4 style="margin-top:14px">Skills</h4>
+        <div class="skills">
+          <div class="skill">Power BI</div>
+          <div class="skill">DAX</div>
+          <div class="skill">SQL</div>
+          <div class="skill">Data Modeling</div>
+          <div class="skill">Excel</div>
+          <div class="skill">Python (Pandas)</div>
+        </div>
+
+        <h4 style="margin-top:14px">Contact</h4>
+        <div class="contact">
+          <div>Email: <a href="mailto:kanishk.pant@example.com">kanishk.pant@example.com</a></div>
+          <div>Location: Gurugram / Delhi NCR</div>
+        </div>
+      </section>
+
+      <aside class="panel">
+        <h3>Highlights</h3>
+        <p style="color:var(--muted);margin-top:8px">9+ years • 20+ dashboards delivered • End-to-end ETL, modeling & visualization</p>
+        <div style="margin-top:12px">
+          <a class="btn" href="#projects">See Projects</a>
+        </div>
+      </aside>
+
+      <section id="projects" class="panel" style="grid-column:1 / -1">
+        <h3>Projects</h3>
+        <div class="projects-grid">
+          <!-- Project card: duplicate and customize -->
+          <article class="card">
+            <img src="assets/project-sales.png" alt="Sales Analytics screenshot">
+            <h4>FMCG Sales Analytics</h4>
+            <p>End-to-end analysis: data ingestion (SFTP), transformation, and an executive Power BI dashboard showing sales, channel performance and region-level KPIs with drill-throughs.</p>
+            <div class="row">
+              <a class="btn ghost" href="https://github.com/yourusername/fmcg-sales" target="_blank">View on GitHub</a>
+              <a class="btn" href="assets/fmcg-sales-report.pdf" download>See My Work</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="assets/project-churn.png" alt="Customer Churn screenshot">
+            <h4>Customer Churn Analysis</h4>
+            <p>SQL + Python pipeline to identify churn drivers, cohort analysis and a dashboard that surfaces retention levers and CLTV segments for targeted campaigns.</p>
+            <div class="row">
+              <a class="btn ghost" href="https://github.com/yourusername/churn-analysis" target="_blank">View on GitHub</a>
+              <a class="btn ghost" href="https://app.powerbi.com/..." target="_blank">Live Dashboard</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="assets/project-ops.png" alt="Operational Insights screenshot">
+            <h4>Operational Insights & Capacity Planning</h4>
+            <p>Interactive dashboard helping operations teams forecast capacity (90-day window), spot bottlenecks and optimize staffing — includes scenario simulations and bookmarks.</p>
+            <div class="row">
+              <a class="btn ghost" href="https://github.com/yourusername/ops-insights" target="_blank">View on GitHub</a>
+              <a class="btn" href="assets/ops-insights-report.pdf" download>See My Work</a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <footer class="panel" style="grid-column:1 / -1;display:flex;align-items:center;justify-content:space-between">
+        <div>© <strong>Kanishk Pant</strong> • Data & Power BI</div>
+        <div style="color:var(--muted)">Email: <a href="mailto:kanishk.pant@example.com">kanishk.pant@example.com</a></div>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
